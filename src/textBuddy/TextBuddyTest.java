@@ -40,6 +40,7 @@ public class TextBuddyTest {
 		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_1 + "\"", TextBuddy.runCommand(cl, testFile, TEST_DELETE + "1"));
 		assertEquals("no line deleted.", TextBuddy.runCommand(cl, testFile, TEST_DELETE + "1"));
 		assertEquals("all content deleted from " + TEST_FILE, TextBuddy.runCommand(cl, testFile, TEST_CLEAR));
+		testFile.delete();
 
 	}
 	
@@ -50,6 +51,7 @@ public class TextBuddyTest {
 		assertEquals("added to " + TEST_FILE + ": \"" + TEST_LINE_2 + "\"", CommandListener.addLine(testFile, TEST_LINE_2));
 		assertEquals("added to " + TEST_FILE + ": \"" + TEST_LINE_3 + "\"", CommandListener.addLine(testFile, TEST_LINE_3));
 		assertEquals("added to " + TEST_FILE + ": \"" + TEST_LINE_4 + "\"", CommandListener.addLine(testFile, TEST_LINE_4));
+		testFile.delete();
 	}
 	
 	@Test
@@ -60,25 +62,27 @@ public class TextBuddyTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_1 + "\"",CommandListener.deleteLine(testFile, "1"));
-		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_2 + "\"",CommandListener.deleteLine(testFile, "1"));
-		assertEquals("no line deleted.",CommandListener.deleteLine(testFile, "3"));
-		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_4 + "\"",CommandListener.deleteLine(testFile, "2"));	
+		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_1 + "\"", CommandListener.deleteLine(testFile, "1"));
+		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_2 + "\"", CommandListener.deleteLine(testFile, "1"));
+		assertEquals("no line deleted.", CommandListener.deleteLine(testFile, "3"));
+		assertEquals("deleted from " + TEST_FILE + ": \"" + TEST_LINE_4 + "\"", CommandListener.deleteLine(testFile, "2"));	
+		testFile.delete();
 	}
 	
 	@Test
 	public void clearTest() {
 		File testFile = new File(TEST_FILE);
-		File empty = new File(EMPTY_FILE);
+		File emptyFile = new File(EMPTY_FILE);
 		try {
 			populateFile(testFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertThat(testFile.length(),not(empty.length()));
+		assertThat(testFile.length(),not(emptyFile.length()));
 		assertEquals("all content deleted from " + TEST_FILE, CommandListener.clear(testFile));
-		assertEquals(testFile.length(), empty.length());
-		
+		assertEquals(testFile.length(), emptyFile.length());
+		testFile.delete();
+		emptyFile.delete();
 	}
 	
 	@Test
@@ -90,6 +94,7 @@ public class TextBuddyTest {
 			e.printStackTrace();
 		}
 		assertEquals(TEST_DISPLAY_OUTPUT, CommandListener.display(testFile));
+		testFile.delete();
 	}
 	
 	@Test
@@ -100,7 +105,8 @@ public class TextBuddyTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals(TEST_SEARCH_OUTPUT, CommandListener.searchKeyword(testFile, "the"));		
+		assertEquals(TEST_SEARCH_OUTPUT, CommandListener.searchKeyword(testFile, "the"));
+		testFile.delete();
 	}
 	
 	@Test
@@ -115,7 +121,10 @@ public class TextBuddyTest {
 		}
 		assertEquals(TEST_SORTED_OUTPUT, CommandListener.sort(testFile));
 		assertEquals(CommandListener.collectLines(testFile), CommandListener.collectLines(sortedFile));
+		testFile.delete();
+		sortedFile.delete();
 	}
+	
 	private void populateFile(File file) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.append(TEST_LINE_1 + "\n");

@@ -56,14 +56,17 @@ public class CommandListener {
 			}
 			if(found) {
 				int i = 0;
-				feedbackString.append(String.format(MESSAGE_SEARCH_FILE_SUCCESS, file.getName()) + "\n");
+				feedbackString.append(String.format(MESSAGE_SEARCH_FILE_SUCCESS, 
+									  file.getName()) + "\n");
 				while (!searchResult.isEmpty()) {
 					i++;
-					feedbackString.append(i + ". " + searchResult.firstElement() + "\n");
+					feedbackString.append(i + ". ");
+					feedbackString.append(searchResult.firstElement() + "\n");
 					searchResult.remove(searchResult.firstElement());
 				}
 			} else {
-				feedbackString.append(String.format(MESSAGE_SEARCH_FILE_FAIL + "\n", searchKey));
+				feedbackString.append(String.format(MESSAGE_SEARCH_FILE_FAIL + "\n", 
+													searchKey));
 			}
 		} catch (FileNotFoundException e) {
 			printMessage(MESSAGE_ERROR_SEARCH_FILE);
@@ -255,7 +258,9 @@ public class CommandListener {
 		return deletedString;
 	}
 
-	private static BufferedWriter writeToFile(File file, Vector<String> linesNotDeleted, int j) throws IOException {
+	private static BufferedWriter writeToFile(File file, 
+											  Vector<String> linesNotDeleted, 
+											  int j) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
 		for (int k = 0; k < j - 1; k++) {
 			writer.write(linesNotDeleted.elementAt(k) + "\n");
