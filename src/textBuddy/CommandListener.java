@@ -21,7 +21,7 @@ public class CommandListener {
 	private static final String MESSAGE_CLEAR_FILE = "all content deleted from %1$s";
 	private static final String MESSAGE_SEARCH_FILE_SUCCESS = "found in %1$s:";
 	private static final String MESSAGE_SEARCH_FILE_FAIL = "\"%1$s\" not found!";
-	private static final String MESSAGE_SORT_FILE = "Sorted alphabetically: \"%1$s\"";
+	private static final String MESSAGE_SORT_FILE = "%1$s sorted alphabetically";
 	private static final String MESSAGE_ERROR_WRITE_TO_FILE = "error writing to file!";
 	private static final String MESSAGE_ERROR_DISPLAY_FILE = "error, file to display not found!";
 	private static final String MESSAGE_ERROR_DELETE_LINE = "error deleting line!";
@@ -52,13 +52,14 @@ public class CommandListener {
 				if (lines.get(i).toLowerCase().contains(searchKey.toLowerCase())) {
 					found = true;
 					searchResult.addElement(lines.get(i));
-					System.out.println("test" + lines.get(i));
 				}
 			}
 			if(found) {
+				int i = 0;
 				feedbackString.append(String.format(MESSAGE_SEARCH_FILE_SUCCESS, file.getName()) + "\n");
 				while (!searchResult.isEmpty()) {
-					feedbackString.append(searchResult.firstElement() + "\n");
+					i++;
+					feedbackString.append(i + ". " + searchResult.firstElement() + "\n");
 					searchResult.remove(searchResult.firstElement());
 				}
 			} else {

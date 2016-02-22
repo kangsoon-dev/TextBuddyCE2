@@ -20,7 +20,12 @@
  * command: display
  * 1. little brown fox
  * 2. jumped over the moon
- * command: delete 2
+ * command: sort
+ * mytextfile.txt sorted alphabetically
+ * command: display
+ * 1. jumped over the moon
+ * 2. little brown fox
+ * command: delete 1
  * deleted from mytextfile.txt: "jumped over the moon"
  * command: display
  * 1. little brown fox

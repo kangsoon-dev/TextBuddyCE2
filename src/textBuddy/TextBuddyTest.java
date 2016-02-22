@@ -27,8 +27,8 @@ public class TextBuddyTest {
 	private static final String TEST_LINE_4 = "asdfasdfasdf";
 	
 	private static final String TEST_DISPLAY_OUTPUT = "1. The quick brown fox\n2. jumps over the lazy dog\n3. this is a line\n4. asdfasdfasdf\n";
-	private static final String TEST_SEARCH_OUTPUT = "found in mytestfile.txt:\nThe quick brown fox\njumps over the lazy dog\n";
-	private static final String TEST_SORTED_OUTPUT = "Sorted alphabetically: \"mytestfile.txt\"";
+	private static final String TEST_SEARCH_OUTPUT = "found in mytestfile.txt:\n1. The quick brown fox\n2. jumps over the lazy dog\n";
+	private static final String TEST_SORTED_OUTPUT = "mytestfile.txt sorted alphabetically";
 	
 	private static CommandListener cl = new CommandListener();
 	
